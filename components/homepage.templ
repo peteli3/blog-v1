@@ -11,6 +11,8 @@ var StravaURL = templ.URL("https://www.strava.com/athletes/45904550")
 var InstagramURL = templ.URL("https://instagram.com/peteli3")
 var BeliURL = templ.URL("https://beliapp.co/lists/peteli")
 
+var P4LightningTalkURL = templ.URL("https://youtu.be/g4f2lHz8meo?t=383")
+
 templ ProfilePicture(imagePath string, alt string) {
 	<div class="mt-16 mb-4 w-48 h-48 rounded-full overflow-hidden">
 		<div class="w-full h-full overflow-hidden relative">
@@ -59,39 +61,55 @@ templ Homepage() {
 		<body>
 			<div class="h-dvh bg-gradient-to-b from-slate-800 to-cyan-800">
 				<div class="flex flex-col">
-					<div class="m-auto">
-						@ProfilePicture("/assets/me.jpg", fullName)
-					</div>
-					<div class="m-auto max-w-screen-sm">
-						@FullName(fullName)
-						@Introduction(introduction)
-					</div>
-					<div class="m-auto mt-8 w-96">
-						<div class="grid grid-cols-3 gap-24">
-							<div class="flex flex-col items-center">
-								@LinkSectionTitle("Work")
-								@LinkButton("LinkedIn", LinkedInURL)
-								@LinkButton("GitHub", GitHubURL)
-							</div>
-							<div class="flex flex-col items-center">
-								@LinkSectionTitle("Sports")
-								@LinkButton("KAYA", KayaURL)
-								@LinkButton("Slopes", SlopesURL)
-								@LinkButton("Strava", StravaURL)
-							</div>
-							<div class="flex flex-col items-center">
-								@LinkSectionTitle("Social")
-								@LinkButton("Instagram", InstagramURL)
-								@LinkButton("Beli", BeliURL)
+					<main class="flex-grow">
+						<div class="m-auto max-w-screen-sm">
+							<div class="flex justify-center items-center">
+								@ProfilePicture("/assets/me.jpg", fullName)
 							</div>
 						</div>
-					</div>
-					<div class="m-auto mt-8 w-96">
-						<div class="flex flex-col items-center">
-							@SectionTitle("Résumé")
-							@LinkButton("April 2024", "/assets/resume.pdf")
+						<div class="m-auto max-w-screen-sm">
+							@FullName(fullName)
+							@Introduction(introduction)
 						</div>
-					</div>
+						<div class="m-auto mt-8 w-96">
+							<div class="grid grid-cols-3 gap-24">
+								<div class="flex flex-col items-center">
+									@LinkSectionTitle("Work")
+									@LinkButton("LinkedIn", LinkedInURL)
+									@LinkButton("GitHub", GitHubURL)
+								</div>
+								<div class="flex flex-col items-center">
+									@LinkSectionTitle("Sports")
+									@LinkButton("KAYA", KayaURL)
+									@LinkButton("Slopes", SlopesURL)
+									@LinkButton("Strava", StravaURL)
+								</div>
+								<div class="flex flex-col items-center">
+									@LinkSectionTitle("Social")
+									@LinkButton("Instagram", InstagramURL)
+									@LinkButton("Beli", BeliURL)
+								</div>
+							</div>
+						</div>
+						<div class="m-auto mt-8 w-96">
+							<div class="flex flex-col items-center">
+								@SectionTitle("Résumé")
+								@LinkButton("April 2024", "/assets/resume.pdf")
+							</div>
+						</div>
+						<div class="m-auto mt-8 w-96">
+							<div class="flex flex-col items-center">
+								@SectionTitle("Presentations")
+								@LinkButton("Implementing the PSA Switch", P4LightningTalkURL)
+							</div>
+						</div>
+						<div class="m-auto mt-8 w-96">
+							<div class="flex flex-col items-center">
+								@SectionTitle("Playground")
+								@LinkButton("HTMX", "/htmx")
+							</div>
+						</div>
+					</main>
 				</div>
 			</div>
 		</body>
