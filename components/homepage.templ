@@ -57,38 +57,40 @@ templ Homepage() {
 			<link rel="stylesheet" href="/css/output.css" />
 		</head>
 		<body>
-			<div class="flex flex-col">
-				<div class="m-auto">
-					@ProfilePicture("/assets/me.jpg", fullName)
-				</div>
-				<div class="m-auto max-w-screen-sm">
-					@FullName(fullName)
-					@Introduction(introduction)
-				</div>
-				<div class="m-auto mt-8 w-96">
-					<div class="grid grid-cols-3 gap-24">
-						<div class="flex flex-col items-center">
-							@LinkSectionTitle("Work")
-							@LinkButton("LinkedIn", LinkedInURL)
-							@LinkButton("GitHub", GitHubURL)
-						</div>
-						<div class="flex flex-col items-center">
-							@LinkSectionTitle("Sports")
-							@LinkButton("KAYA", KayaURL)
-							@LinkButton("Slopes", SlopesURL)
-							@LinkButton("Strava", StravaURL)
-						</div>
-						<div class="flex flex-col items-center">
-							@LinkSectionTitle("Social")
-							@LinkButton("Instagram", InstagramURL)
-							@LinkButton("Beli", BeliURL)
+			<div class="h-dvh bg-gradient-to-b from-slate-800 to-cyan-800">
+				<div class="flex flex-col">
+					<div class="m-auto">
+						@ProfilePicture("/assets/me.jpg", fullName)
+					</div>
+					<div class="m-auto max-w-screen-sm">
+						@FullName(fullName)
+						@Introduction(introduction)
+					</div>
+					<div class="m-auto mt-8 w-96">
+						<div class="grid grid-cols-3 gap-24">
+							<div class="flex flex-col items-center">
+								@LinkSectionTitle("Work")
+								@LinkButton("LinkedIn", LinkedInURL)
+								@LinkButton("GitHub", GitHubURL)
+							</div>
+							<div class="flex flex-col items-center">
+								@LinkSectionTitle("Sports")
+								@LinkButton("KAYA", KayaURL)
+								@LinkButton("Slopes", SlopesURL)
+								@LinkButton("Strava", StravaURL)
+							</div>
+							<div class="flex flex-col items-center">
+								@LinkSectionTitle("Social")
+								@LinkButton("Instagram", InstagramURL)
+								@LinkButton("Beli", BeliURL)
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="m-auto mt-8 w-96">
-					<div class="flex flex-col items-center">
-						@SectionTitle("Résumé")
-						@LinkButton("April 2024", "/assets/resume.pdf")
+					<div class="m-auto mt-8 w-96">
+						<div class="flex flex-col items-center">
+							@SectionTitle("Résumé")
+							@LinkButton("April 2024", "/assets/resume.pdf")
+						</div>
 					</div>
 				</div>
 			</div>
