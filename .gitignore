@@ -1,2 +1,6 @@
 *_templ.go
 *_templ.txt
+output.css
+node_modules
+*.swp
+.DS_Store

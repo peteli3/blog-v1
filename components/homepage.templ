@@ -1,15 +1,97 @@
 package components
 
-var fullName = "Pete J. Li"
+var fullName = "Peter J. Li"
+var introduction = "I go by Pete, and I'm a Systems Software Engineer @ Akamai"
+
+var LinkedInURL = templ.URL("https://www.linkedin.com/in/peteclimbs/")
+var GitHubURL = templ.URL("https://github.com/peteli3")
+var KayaURL = templ.URL("https://kaya-app.kayaclimb.com/share/profile?id=86231")
+var SlopesURL = templ.URL("https://my.getslopes.com/app/addFriend/p0QWArnmwV")
+var StravaURL = templ.URL("https://www.strava.com/athletes/45904550")
+var InstagramURL = templ.URL("https://instagram.com/peteli3")
+var BeliURL = templ.URL("https://beliapp.co/lists/peteli")
+
+templ ProfilePicture(imagePath string, alt string) {
+	<div class="mt-16 mb-4 w-48 h-48 rounded-full overflow-hidden">
+		<div class="w-full h-full overflow-hidden relative">
+			<img class="w-full absolute -top-5" src={ imagePath } alt={ alt } />
+		</div>
+	</div>
+}
+
+templ FullName(name string) {
+	<h1 class="text-center text-3xl font-bold dark:text-white">
+		{ name }
+	</h1>
+}
+
+templ Introduction(text string) {
+	<p class="mt-2 text-center text-base dark:text-slate-400">
+		{ text }
+	</p>
+}
+
+templ LinkSectionTitle(title string) {
+	<h2 class="mb-2 text-center text-xl font-bold dark:text-white">
+		{ title }
+	</h2>
+}
+
+templ LinkButton(text string, url templ.SafeURL) {
+	<a class="mb-2 py-2 px-4 w-fit hover:scale-110 duration-500 bg-slate-700 text-center text-white hover:text-cyan-400 border border-white hover:border-cyan-400 rounded-lg shadow-xl" href={ url } target="_blank">
+		{ text }
+	</a>
+}
+
+templ SectionTitle(title string) {
+	<h2 class="mb-2 text-xl font-bold dark:text-white">
+		{ title }
+	</h2>
+}
 
 templ Homepage() {
 	<html>
 		<head>
 			<title>{ fullName }</title>
 			<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+			<link rel="stylesheet" href="/assets/output.css" />
 		</head>
 		<body>
-			<div>{ fullName }</div>
+			<div class="flex flex-col">
+				<div class="m-auto">
+					@ProfilePicture("/assets/me.jpg", fullName)
+				</div>
+				<div class="m-auto max-w-screen-sm">
+					@FullName(fullName)
+					@Introduction(introduction)
+				</div>
+				<div class="m-auto mt-8 w-96">
+					<div class="grid grid-cols-3 gap-24">
+						<div class="flex flex-col items-center">
+							@LinkSectionTitle("Work")
+							@LinkButton("LinkedIn", LinkedInURL)
+							@LinkButton("GitHub", GitHubURL)
+						</div>
+						<div class="flex flex-col items-center">
+							@LinkSectionTitle("Sports")
+							@LinkButton("KAYA", KayaURL)
+							@LinkButton("Slopes", SlopesURL)
+							@LinkButton("Strava", StravaURL)
+						</div>
+						<div class="flex flex-col items-center">
+							@LinkSectionTitle("Social")
+							@LinkButton("Instagram", InstagramURL)
+							@LinkButton("Beli", BeliURL)
+						</div>
+					</div>
+				</div>
+				<div class="m-auto mt-8 w-96">
+					<div class="flex flex-col items-center">
+						@SectionTitle("Resume")
+						@LinkButton("April 2024", "/assets/resume.pdf")
+					</div>
+				</div>
+			</div>
 		</body>
 	</html>
 }
