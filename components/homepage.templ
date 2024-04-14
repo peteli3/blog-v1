@@ -38,7 +38,7 @@ templ LinkSectionTitle(title string) {
 }
 
 templ LinkButton(text string, url templ.SafeURL) {
-	<a class="mb-2 py-2 px-4 w-fit hover:scale-110 duration-500 bg-slate-700 text-center text-white hover:text-cyan-400 border border-white hover:border-cyan-400 rounded-lg shadow-xl" href={ url } target="_blank">
+	<a class="mb-2 py-2 px-4 w-fit hover:scale-110 duration-500 bg-slate-700 text-center text-white hover:text-cyan-300 border border-white hover:border-cyan-300 rounded-lg shadow-xl" href={ url } target="_blank">
 		{ text }
 	</a>
 }
@@ -54,7 +54,7 @@ templ Homepage() {
 		<head>
 			<title>{ fullName }</title>
 			<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-			<link rel="stylesheet" href="/assets/output.css" />
+			<link rel="stylesheet" href="/css/output.css" />
 		</head>
 		<body>
 			<div class="flex flex-col">
@@ -87,7 +87,7 @@ templ Homepage() {
 				</div>
 				<div class="m-auto mt-8 w-96">
 					<div class="flex flex-col items-center">
-						@SectionTitle("Resume")
+						@SectionTitle("Résumé")
 						@LinkButton("April 2024", "/assets/resume.pdf")
 					</div>
 				</div>

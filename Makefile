@@ -4,7 +4,7 @@ templ:
 
 .PHONY: tailwind
 tailwind:
-	npx tailwindcss -i ./assets/input.css -o ./assets/output.css --watch
+	npx tailwindcss -i ./css/input.css -o ./css/output.css --watch
 
 .PHONY: clean
 clean:
