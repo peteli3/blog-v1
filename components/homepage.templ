@@ -22,7 +22,7 @@ templ ProfilePicture(imagePath string, alt string) {
 }
 
 templ FullName(name string) {
-	<h1 class="text-center text-3xl font-bold dark:text-white">
+	<h1 class="text-center text-3xl font-bold">
 		{ name }
 	</h1>
 }
@@ -34,19 +34,19 @@ templ Introduction(text string) {
 }
 
 templ LinkSectionTitle(title string) {
-	<h2 class="mb-2 text-center text-xl font-bold dark:text-white">
+	<h2 class="mb-2 text-center text-xl font-bold">
 		{ title }
 	</h2>
 }
 
 templ LinkButton(text string, url templ.SafeURL) {
-	<a class="mb-2 py-2 px-4 w-fit hover:scale-110 duration-500 bg-slate-700 text-center text-white hover:text-cyan-300 border border-white hover:border-cyan-300 rounded-lg shadow-xl" href={ url } target="_blank">
+	<a class="btn btn-accent btn-outline hover:scale-110 duration-500 mb-2 shadow-md dark:shadow-xl" href={ url } target="_blank">
 		{ text }
 	</a>
 }
 
 templ SectionTitle(title string) {
-	<h2 class="mb-2 text-xl font-bold dark:text-white">
+	<h2 class="mb-2 text-xl font-bold">
 		{ title }
 	</h2>
 }
@@ -59,7 +59,7 @@ templ Homepage() {
 			<link rel="stylesheet" href="/css/output.css" />
 		</head>
 		<body>
-			<div class="h-dvh bg-gradient-to-b from-slate-800 to-cyan-800">
+			<div class="h-dvh dark:bg-gradient-to-tr dark:from-slate-800 dark:to-cyan-700 bg-gradient-to-bl from-white from-50% to-cyan-200">
 				<div class="flex flex-col">
 					<main class="flex-grow">
 						<div class="m-auto max-w-screen-sm">
