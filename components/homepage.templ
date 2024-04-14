@@ -51,6 +51,12 @@ templ SectionTitle(title string) {
 	</h2>
 }
 
+templ NavButton(text string, url templ.SafeURL) {
+	<a class="btn btn-accent btn-outline hover:scale-110 duration-500 mb-2 shadow-md dark:shadow-xl" href={ url } target="_self">
+		{ text }
+	</a>
+}
+
 templ Homepage() {
 	<html>
 		<head>
@@ -59,9 +65,9 @@ templ Homepage() {
 			<link rel="stylesheet" href="/css/output.css" />
 		</head>
 		<body>
-			<div class="h-dvh dark:bg-gradient-to-tr dark:from-slate-800 dark:to-cyan-700 bg-gradient-to-bl from-white from-50% to-cyan-200">
+			<div class="h-dvh bg-gradient-to-bl dark:from-slate-800 dark:to-cyan-700 from-white from-50% to-cyan-200">
 				<div class="flex flex-col">
-					<main class="flex-grow">
+					<main>
 						<div class="m-auto max-w-screen-sm">
 							<div class="flex justify-center items-center">
 								@ProfilePicture("/assets/me.jpg", fullName)
@@ -106,7 +112,8 @@ templ Homepage() {
 						<div class="m-auto mt-8 w-96">
 							<div class="flex flex-col items-center">
 								@SectionTitle("Playground")
-								@LinkButton("HTMX", "/htmx")
+								@NavButton("HTMX", "/htmx")
+								@NavButton("daisyUI", "/daisyui")
 							</div>
 						</div>
 					</main>

@@ -1,0 +1,52 @@
+package components
+
+var shortName = "Pete"
+
+templ HTMXNavBar() {
+    <div class="navbar dark:bg-slate-800">
+        <div class="m-auto py-1 mb-1">
+            <a class="btn btn-ghost text-xl" href="/" target="_self">
+                Home
+            </a>
+            |
+            <a class="btn btn-ghost text-xl" href="/htmx" target="_self" disabled>
+                HTMX
+            </a>
+            |
+            <a class="btn btn-ghost text-xl" href="/daisyui" target="_self">
+                daisyUI
+            </a>
+        </div>
+    </div>   
+}
+
+templ LazyLoadingSection() {
+    <h1 class="text-3xl font-bold my-2">
+        Lazy Loading
+    </h1>
+    <p class="my-2">
+        A loading spinny should be displayed until image loads:
+    </p>
+}
+
+templ HTMXpage() {
+    <html>
+        <head>
+            <title>HTMX Playground</title>
+            <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+            <link rel="stylesheet" href="/css/output.css" />
+        </head>
+        <body>
+            <div class="h-dvh bg-gradient-to-bl dark:from-slate-800 dark:to-cyan-700 from-white from-50% to-cyan-200">
+				<div class="flex flex-col">
+                    @HTMXNavBar()
+                    <main>
+                        <div class="m-auto max-w-screen-sm p-3">
+                            @LazyLoadingSection()
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </body>
+    </html>
+}

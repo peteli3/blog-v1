@@ -1,8 +1,8 @@
 package main
 
 import (
-	"net/http"
 	"log"
+	"net/http"
 
 	"github.com/a-h/templ"
 
@@ -11,6 +11,9 @@ import (
 
 func main() {
 	http.Handle("/", templ.Handler(components.Homepage()))
+	http.Handle("/htmx", templ.Handler(components.HTMXpage()))
+	http.Handle("/daisyui", templ.Handler(components.DaisyUIpage()))
+
 	http.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("./assets"))))
 	http.Handle("/css/", http.StripPrefix("/css", http.FileServer(http.Dir("./css"))))
 
