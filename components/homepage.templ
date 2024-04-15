@@ -60,6 +60,21 @@ templ NavButton(text string, url templ.SafeURL) {
 	</a>
 }
 
+templ ProjectRepoLinkButton() {
+	<a href={ ProjectRepoURL } target="_blank">
+		<img src="/assets/github-mark-white.svg" height="24" width="24" />
+	</a>
+}
+
+templ Gopher() {
+	<div class="flex flex-col">
+		<div class="flex-1"/>
+		<div class="mt-2">
+			<img src="/assets/favicon.svg" />
+		</div>
+	</div>
+}
+
 templ Homepage() {
 	<html>
 		<head>
@@ -123,15 +138,10 @@ templ Homepage() {
 					<footer>
 						<div class="flex mt-8">
 							<div class="m-auto my-2">
-								<a href={ ProjectRepoURL } target="_blank">
-									<img src="/assets/github-mark-white.svg" height="24" width="24" />
-								</a>
+								@ProjectRepoLinkButton()
 							</div>
-							<div class="mx-auto flex flex-col">
-								<div class="flex-1"/>
-								<div class="mt-2">
-									<img src="/assets/favicon.svg" />
-								</div>
+							<div class="mx-auto">
+								@Gopher()
 							</div>
 						</div>
 					</footer>
