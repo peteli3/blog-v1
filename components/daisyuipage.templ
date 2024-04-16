@@ -18,13 +18,74 @@ templ DaisyUINavBar() {
     </div>   
 }
 
-templ ModalSection() {
-    <h1 class="text-3xl font-bold my-2">
-        Modal
-    </h1>
-    <p class="my-2">
-        A modal button:
-    </p>
+templ ModalsSection() {
+    <div class="flex flex-col mb-8">
+        <h1 class="text-3xl font-bold mb-4">
+            Modals
+        </h1> 
+
+        <div class="mb-4">
+            <button class="btn btn-accent w-fit" onclick="my_modal_1.showModal()">
+                Close button
+            </button>
+            <dialog id="my_modal_1" class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">Hello!</h3>
+                    <p class="py-4">Press ESC key or click the button below to close</p>
+                    <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn btn-accent">Close</button>
+                    </form>
+                    </div>
+                </div>
+            </dialog>
+        </div>
+
+        <div class="mb-4">
+            <button class="btn btn-accent w-fit" onclick="my_modal_3.showModal()">
+                X button
+            </button>
+            <dialog id="my_modal_3" class="modal">
+                <div class="modal-box">
+                    <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <h3 class="font-bold text-lg">Hello!</h3>
+                    <p class="py-4">Press ESC key or click on ✕ button to close</p>
+                </div>
+            </dialog>
+        </div>
+    </div>
+}
+
+templ StepsSection() {
+    <div class="flex flex-col mb-8">
+        <h1 class="mb-4 text-3xl font-bold">
+            Steps
+        </h1>
+        <p class="mb-2">
+            End-game stack progress:
+        </p>
+
+        <ul class="steps steps-vertical">
+            <li class="step step-accent">Go</li>
+            <li class="step step-accent">Templ</li>
+            <li class="step step-accent">Tailwind CSS</li>
+            <li class="step">HTMX</li>
+            <li class="step">SortableJS</li>
+        </ul>
+    </div>
+}
+
+templ AvatarSection() {
+    <div class="flex flex-col mb-8">
+        <h1 class="mb-4 text-3xl font-bold">
+            Avatar
+        </h1>
+        // TODO figure out why daisyUI avatar doesnt work for me
+        @ProfilePicture("/assets/me.jpg", "Me!")
+    </div>
 }
 
 templ DaisyUIpage() {
@@ -36,13 +97,16 @@ templ DaisyUIpage() {
         </head>
         <body>
             <div class="h-dvh overflow-hidden overflow-y-scroll bg-gradient-to-bl dark:from-slate-800 dark:to-cyan-700 from-white from-50% to-cyan-200">
-				<div class="flex flex-col">
+				<div class="h-dvh flex flex-col">
                     @DaisyUINavBar()
-                    <main>
+                    <main class="flex-grow">
                         <div class="m-auto max-w-screen-sm p-3">
-                            @ModalSection()
+                            // @AvatarSection()
+                            @StepsSection()
+                            @ModalsSection()
                         </div>
                     </main>
+                    @Footer()
                 </div>
             </div>
         </body>

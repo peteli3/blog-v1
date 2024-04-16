@@ -16,7 +16,7 @@ var P4LightningTalkURL = templ.URL("https://youtu.be/g4f2lHz8meo?t=383")
 var ProjectRepoURL = templ.URL("https://github.com/peteli3/personal-v1")
 
 templ ProfilePicture(imagePath string, alt string) {
-	<div class="mt-16 mb-4 w-48 h-48 rounded-full overflow-hidden">
+	<div class="w-48 h-48 rounded-full overflow-hidden">
 		<div class="w-full h-full overflow-hidden relative">
 			<img class="w-full absolute -top-5" src={ imagePath } alt={ alt } />
 		</div>
@@ -75,6 +75,19 @@ templ Gopher() {
 	</div>
 }
 
+templ Footer() {
+	<footer>
+		<div class="flex mt-8">
+			<div class="m-auto my-2">
+				@ProjectRepoLinkButton()
+			</div>
+			<div class="mx-auto">
+				@Gopher()
+			</div>
+		</div>
+	</footer>
+}
+
 templ Homepage() {
 	<html>
 		<head>
@@ -88,7 +101,9 @@ templ Homepage() {
 					<main class="flex-grow">
 						<div class="m-auto max-w-screen-sm">
 							<div class="flex justify-center items-center">
-								@ProfilePicture("/assets/me.jpg", fullName)
+								<div class="mt-16 mb-4">
+									@ProfilePicture("/assets/me.jpg", fullName)
+								</div>
 							</div>
 						</div>
 						<div class="m-auto max-w-screen-sm">
@@ -135,16 +150,7 @@ templ Homepage() {
 							</div>
 						</div>
 					</main>
-					<footer>
-						<div class="flex mt-8">
-							<div class="m-auto my-2">
-								@ProjectRepoLinkButton()
-							</div>
-							<div class="mx-auto">
-								@Gopher()
-							</div>
-						</div>
-					</footer>
+					@Footer()
 				</div>
 			</div>
 		</body>
