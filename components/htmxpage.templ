@@ -1,5 +1,9 @@
 package components
 
+import (
+    "strconv"
+)
+
 var shortName = "Pete"
 
 templ HTMXNavBar() {
@@ -20,21 +24,59 @@ templ HTMXNavBar() {
     </div>   
 }
 
-templ LazyLoadingSection() {
-    <h1 class="text-3xl font-bold my-2">
-        Lazy Loading
-    </h1>
-    <p class="my-2">
-        A loading spinny should be displayed until image loads:
+type Counters struct {
+	Templ int
+    HTMX int
+}
+
+templ HTMXCounter(counters Counters) {
+    <p class="my-2" id="HTMXcount">
+        Value: { strconv.Itoa(counters.HTMX) }
     </p>
 }
 
-templ HTMXpage() {
+templ CounterSection(counters Counters) {
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold my-2">
+            Counter (HTMX)
+        </h1>
+        @HTMXCounter(counters)
+        <p class="my-2 dark:text-slate-400">
+            Notice how clicking this button does not reload full page HTML:
+        </p>
+        <button
+            hx-post="/htmx/incHTMX"
+            hx-trigger="click"
+            hx-target="#HTMXcount"
+            hx-swap="outerHTML"
+            class="btn btn-accent"
+        >
+            Increment
+        </button>
+    </div>
+    
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold my-2">
+            Counter (Just templ)
+        </h1>
+        <p class="my-2">
+            Value: { strconv.Itoa(counters.Templ) }
+        </p>
+        <form action="/htmx/incTmpl" method="POST">
+            <button type="submit" name="incTempl" class="btn btn-accent">
+                Increment
+            </button>
+        </form>
+    </div>
+}
+
+templ HTMXpage(counters Counters) {
     <html>
         <head>
             <title>HTMX Playground</title>
             <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
             <link rel="stylesheet" href="/css/output.css" />
+            <script src="/assets/js/htmx.min.js" />
         </head>
         <body>
             <div class="h-dvh overflow-hidden overflow-y-scroll bg-gradient-to-bl dark:from-slate-800 dark:to-cyan-700 from-white from-50% to-cyan-200">
@@ -42,7 +84,7 @@ templ HTMXpage() {
                     @HTMXNavBar()
                     <main class="flex-grow">
                         <div class="m-auto max-w-screen-sm p-3">
-                            @LazyLoadingSection()
+                            @CounterSection(counters)
                         </div>
                     </main>
                     @Footer()
