@@ -10,9 +10,11 @@ import (
 )
 
 var counters components.Counters
+var formData components.FormData
 
 func doHTMXGet(w http.ResponseWriter, r *http.Request) {
-	components.HTMXpage(counters).Render(r.Context(), w)
+	props := components.HTMXpageProps{Counts: counters, Forms: formData}
+	components.HTMXpage(props).Render(r.Context(), w)
 }
 
 func doHTMXIncTemplPost(w http.ResponseWriter, r *http.Request) {
@@ -34,6 +36,18 @@ func doHTMXIncHTMXSuccess(w http.ResponseWriter, r *http.Request) {
 	components.HTMXCounter(counters).Render(r.Context(), w)
 }
 
+func doHTMXSubmitForm(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	formData.Name = r.Form.Get("formName")
+	formData.Species = r.Form.Get("formSpecies")
+	formData.FavoriteFood = r.Form.Get("formFavoriteFood")
+	http.Redirect(w, r, "/htmx/submitForm/success", http.StatusSeeOther)
+}
+
+func doHTMXSubmitFormSuccess(w http.ResponseWriter, r *http.Request) {
+	components.FormSuccess(formData).Render(r.Context(), w)
+}
+
 func main() {
 	http.Handle("/", templ.Handler(components.Homepage()))
 
@@ -53,6 +67,14 @@ func main() {
 	})
 	http.HandleFunc("/htmx/incHTMX/success", func(w http.ResponseWriter, r *http.Request) {
 		doHTMXIncHTMXSuccess(w, r)
+	})
+	http.HandleFunc("/htmx/submitForm", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			doHTMXSubmitForm(w, r)
+		}
+	})
+	http.HandleFunc("/htmx/submitForm/success", func(w http.ResponseWriter, r *http.Request) {
+		doHTMXSubmitFormSuccess(w, r)
 	})
 
 	// daisyui playground

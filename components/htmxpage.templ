@@ -70,7 +70,80 @@ templ CounterSection(counters Counters) {
     </div>
 }
 
-templ HTMXpage(counters Counters) {
+type FormData struct {
+    Name string
+    Species string
+    FavoriteFood string
+}
+
+templ FormValues(data FormData) {
+    <div id="formValues">
+        <p>Name: { data.Name }</p>
+        <p>Species: { data.Species }</p>
+        <p>Favorite Food: { data.FavoriteFood }</p>
+    </div>
+}
+
+templ FormSuccess(data FormData) {
+    @FormValues(data)
+    // TODO figure out why this works but trigger doesnt...
+    <script>
+        document.getElementById('modalForm1').close();
+    </script>
+}
+
+templ FormSection(data FormData) {
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold my-2">
+            Modal Form
+        </h1>
+        <div class="my-2">
+            @FormValues(data)
+        </div>
+        <button class="btn btn-accent" onclick="modalForm1.showModal()">
+            Edit
+        </button>
+        <dialog id="modalForm1" class="modal">
+            <div class="modal-box">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+                <h3 class="font-bold text-lg my-2">Chamaaa</h3>
+                <form
+                    hx-post="/htmx/submitForm"
+                    hx-target="#formValues"
+                    hx-swap="outerHTML"
+                >
+                    <label class="input input-bordered flex items-center gap-2 my-2">
+                        <p class="text-slate-400">Name: </p>
+                        <input type="text" name="formName" class="grow" value={ data.Name } />
+                    </label>
+                    <label class="input input-bordered flex items-center gap-2 my-2">
+                        <p class="text-slate-400">Species: </p>
+                        <input type="text" name="formSpecies" class="grow" value={ data.Species } />
+                    </label>
+                    <label class="input input-bordered flex items-center gap-2 my-2">
+                        <p class="text-slate-400">Favorite Food: </p>
+                        <input type="text" name="formFavoriteFood" class="grow" value={ data.FavoriteFood } />
+                    </label>
+                    <div class="flex flex-row">
+                        <div class="flex-1" />
+                        <button class="btn btn-accent" type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+    </div>
+}
+
+type HTMXpageProps struct {
+    Counts Counters
+    Forms FormData
+}
+
+templ HTMXpage(props HTMXpageProps) {
     <html>
         <head>
             <title>HTMX Playground</title>
@@ -84,7 +157,8 @@ templ HTMXpage(counters Counters) {
                     @HTMXNavBar()
                     <main class="flex-grow">
                         <div class="m-auto max-w-screen-sm p-3">
-                            @CounterSection(counters)
+                            @FormSection(props.Forms)
+                            @CounterSection(props.Counts)
                         </div>
                     </main>
                     @Footer()
