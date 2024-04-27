@@ -11,9 +11,18 @@ import (
 
 var counters components.Counters
 var formData components.FormData
+var speciesChoices = []string{
+	"armadillo",
+	"capybara",
+	"platypus",
+}
 
 func doHTMXGet(w http.ResponseWriter, r *http.Request) {
-	props := components.HTMXpageProps{Counts: counters, Forms: formData}
+	props := components.HTMXpageProps{
+		Counts:         counters,
+		Forms:          formData,
+		SpeciesChoices: speciesChoices,
+	}
 	components.HTMXpage(props).Render(r.Context(), w)
 }
 

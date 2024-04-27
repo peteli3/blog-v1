@@ -92,7 +92,7 @@ templ FormSuccess(data FormData) {
     </script>
 }
 
-templ FormSection(data FormData) {
+templ FormSection(data FormData, speciesChoices []string) {
     <div class="mb-8">
         <h1 class="text-3xl font-bold my-2">
             Modal Form
@@ -108,7 +108,7 @@ templ FormSection(data FormData) {
                 <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
-                <h3 class="font-bold text-lg my-2">Chamaaa</h3>
+                <h2 class="font-bold text-lg my-2">Enter your info:</h2>
                 <form
                     hx-post="/htmx/submitForm"
                     hx-target="#formValues"
@@ -118,10 +118,18 @@ templ FormSection(data FormData) {
                         <p class="text-slate-400">Name: </p>
                         <input type="text" name="formName" class="grow" value={ data.Name } />
                     </label>
-                    <label class="input input-bordered flex items-center gap-2 my-2">
-                        <p class="text-slate-400">Species: </p>
-                        <input type="text" name="formSpecies" class="grow" value={ data.Species } />
-                    </label>
+                    <div class="flex flex-row">
+                        <p class="text-slate-400 my-auto mx-4 w-fit">Species: </p>
+                        <select name="formSpecies" class="select select-bordered w-full">
+                            for _, item := range speciesChoices {
+                                if item == data.Species {
+                                    <option selected>{ item }</option>
+                                } else {
+                                    <option>{ item }</option>
+                                }
+                            }
+                        </select>
+                    </div>
                     <label class="input input-bordered flex items-center gap-2 my-2">
                         <p class="text-slate-400">Favorite Food: </p>
                         <input type="text" name="formFavoriteFood" class="grow" value={ data.FavoriteFood } />
@@ -141,6 +149,7 @@ templ FormSection(data FormData) {
 type HTMXpageProps struct {
     Counts Counters
     Forms FormData
+    SpeciesChoices []string
 }
 
 templ HTMXpage(props HTMXpageProps) {
@@ -157,7 +166,7 @@ templ HTMXpage(props HTMXpageProps) {
                     @HTMXNavBar()
                     <main class="flex-grow">
                         <div class="m-auto max-w-screen-sm p-3">
-                            @FormSection(props.Forms)
+                            @FormSection(props.Forms, props.SpeciesChoices)
                             @CounterSection(props.Counts)
                         </div>
                     </main>
