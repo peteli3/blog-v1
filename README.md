@@ -1,5 +1,7 @@
 # Personal v1
 
+Homepage containing links and short bio.
+
 ```bash
 Available make commands:
 
