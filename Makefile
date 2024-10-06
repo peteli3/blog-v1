@@ -10,4 +10,12 @@ tailwind:
 clean:
 	rm -f \
 		components/*_templ.go \
-		assets/output.css
+		css/output.css \
+		personal-v1.tar
+
+.PHONY: build
+build:
+	templ generate
+	npx tailwindcss -i ./css/input.css -o ./css/output.css --minify
+	docker build -t personal-v1:latest --platform linux/amd64 .
+	docker save personal-v1:latest --output personal-v1.tar

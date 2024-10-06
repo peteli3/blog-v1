@@ -2,5 +2,6 @@
 *_templ.txt
 output.css
 node_modules
+*.tar
 *.swp
 .DS_Store
